@@ -30,17 +30,24 @@ export async function GET(request: Request) {
     let tarefas;
     if (papel === 'Chefe') {
       tarefas = await sql`
-        SELECT id, titulo, descricao, prioridade, status, responsavel_id, criado_em, atualizado_em
-        FROM tarefas
-        ORDER BY criado_em DESC
+        SELECT
+          t.id, t.titulo, t.descricao, t.prioridade, t.status,
+          t.responsavel_id, t.assumida_em, t.criado_em, t.atualizado_em,
+          u.email AS responsavel_email
+        FROM tarefas t
+        LEFT JOIN usuarios u ON u.id = t.responsavel_id
+        ORDER BY t.criado_em DESC
       `;
     } else {
-      // Desenvolvedor vê apenas tarefas disponíveis
       tarefas = await sql`
-        SELECT id, titulo, descricao, prioridade, status, responsavel_id, criado_em, atualizado_em
-        FROM tarefas
-        WHERE status = 'Disponível'
-        ORDER BY criado_em DESC
+        SELECT
+          t.id, t.titulo, t.descricao, t.prioridade, t.status,
+          t.responsavel_id, t.assumida_em, t.criado_em, t.atualizado_em,
+          u.email AS responsavel_email
+        FROM tarefas t
+        LEFT JOIN usuarios u ON u.id = t.responsavel_id
+        WHERE t.status = 'Disponível'
+        ORDER BY t.criado_em DESC
       `;
     }
 

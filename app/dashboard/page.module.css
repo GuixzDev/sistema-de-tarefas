@@ -211,3 +211,133 @@
   color: #fff;
   border-color: var(--primary);
 }
+
+/* ─── Nav tabs (Tarefas / Usuários) ─── */
+.navTabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.navTab {
+  padding: 0.65rem 1.25rem;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -1.5px;
+  border-radius: 0;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.navTab:hover { color: var(--text); }
+
+.navTabActive {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ─── Painel de Gerenciar Usuários ─── */
+.usersPanel { display: flex; flex-direction: column; gap: 2rem; }
+
+.addUserForm {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.addUserForm h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.addUserGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 140px auto;
+  gap: 0.75rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .addUserGrid { grid-template-columns: 1fr; }
+}
+
+.addUserField { display: flex; flex-direction: column; gap: 0.35rem; }
+.addUserField label { font-size: 0.8rem; color: var(--text-muted); }
+
+.btnAddUser {
+  padding: 0.65rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  height: 40px;
+  align-self: flex-end;
+}
+.btnAddUser:hover:not(:disabled) { background: var(--primary-hover); }
+
+/* Users table */
+.usersTable {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.usersTable h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tableWrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+td {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface2); }
+
+/* Card footer (responsável) */
+.cardFooter {
+  margin-top: 0.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cardFooter span { color: var(--text); font-weight: 500; }

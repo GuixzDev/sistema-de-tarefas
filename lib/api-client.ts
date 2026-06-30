@@ -22,6 +22,8 @@ export interface Tarefa {
   prioridade: 'Baixa' | 'Média' | 'Alta';
   status: 'Disponível' | 'Em Andamento' | 'Concluída';
   responsavel_id: string | null;
+  responsavel_email?: string | null;
+  assumida_em?: string | null;
   criado_em: string;
   atualizado_em: string;
 }
@@ -52,11 +54,16 @@ async function request<T>(
 
 // ─── Auth ────────────────────────────────────────────────────
 
-export async function apiRegistro(email: string, senha: string) {
-  return request<{ id: string; email: string }>('/api/auth/registro', {
+export async function apiRegistroAdmin(
+  token: string,
+  email: string,
+  senha: string,
+  papel: 'Chefe' | 'Desenvolvedor'
+) {
+  return request<{ id: string; email: string; papel: string }>('/api/auth/registro', {
     method: 'POST',
-    body: JSON.stringify({ email, senha }),
-  });
+    body: JSON.stringify({ email, senha, papel }),
+  }, token);
 }
 
 export async function apiLogin(email: string, senha: string) {
@@ -92,6 +99,10 @@ export async function apiExcluirTarefa(token: string, id: string) {
 }
 
 // ─── Usuários ────────────────────────────────────────────────
+
+export async function apiListarUsuarios(token: string) {
+  return request<Usuario[]>('/api/usuarios', { method: 'GET' }, token);
+}
 
 export async function apiAlterarPapel(
   token: string,

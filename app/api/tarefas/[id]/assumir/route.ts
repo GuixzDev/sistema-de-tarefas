@@ -57,12 +57,12 @@ export async function POST(request: Request, { params }: RouteParams) {
         throw { code: 'CONFLICT', message: 'Usuário já possui uma tarefa em andamento' };
       }
 
-      // 4. Assumir a tarefa
+      // 4. Assumir a tarefa — grava responsavel_id e assumida_em
       const updated = await tx`
         UPDATE tarefas
-        SET status = 'Em Andamento', responsavel_id = ${userId}
+        SET status = 'Em Andamento', responsavel_id = ${userId}, assumida_em = now()
         WHERE id = ${params.id}
-        RETURNING id, titulo, descricao, prioridade, status, responsavel_id, criado_em, atualizado_em
+        RETURNING id, titulo, descricao, prioridade, status, responsavel_id, assumida_em, criado_em, atualizado_em
       `;
 
       return updated[0];

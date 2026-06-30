@@ -63,6 +63,10 @@ export interface Tarefa {
   status: StatusTarefa;
   /** ID do Desenvolvedor responsável — null quando status é 'Disponível' */
   responsavel_id: string | null;
+  /** Email do responsável (via JOIN) — null quando não atribuída */
+  responsavel_email?: string | null;
+  /** Timestamp de quando a tarefa foi assumida */
+  assumida_em?: string | null;
   /** Timestamp de criação */
   criado_em: Date;
   /** Timestamp da última atualização — mantido pelo trigger do banco */
